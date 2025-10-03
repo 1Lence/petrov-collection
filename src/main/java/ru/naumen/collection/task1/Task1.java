@@ -1,5 +1,8 @@
 package ru.naumen.collection.task1;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Дано:
  * <pre>
@@ -22,8 +25,12 @@ package ru.naumen.collection.task1;
  * @author vpyzhyanov
  * @since 19.10.2023
  */
-public class Task1
-{
+public class Task1 {
+    /**
+     * Выбрана такая коллекция, потому что мне необходимы только операции по конкретному хэшу
+     */
+    private Map<Ticket, Goods> goodsMap = new HashMap<>(256); //Допустим что данные малы
+
     public enum Goods {
         /**
          * нет товаров
@@ -41,13 +48,10 @@ public class Task1
 
     /**
      * Получить товары по билету
-     * <p>Сложность алгоритма O(1)</p>
-     *
-     * <p><b>Мы не забыли определить equals и hashcode у класса {@link Ticket}</b></p>
-     * <p>Достаточно их определить только для id, т.к. он уникален</p>
+     * <p>Сложность МОЕГО "алгоритма" O(1), это обеспечивается тем, что я задал начальный размер мапы</p>
+     * Коллизии очень маловероятны благодаря тому что правильно задан equals/hashcode, id будет (должен) всегда уникальным
      */
     public Goods getGoods(Ticket ticket) {
-        // TODO реализовать
-        return null;
+        return goodsMap.get(ticket);
     }
 }
