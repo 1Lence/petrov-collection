@@ -1,7 +1,6 @@
 package ru.naumen.collection.task2;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * Дано:
@@ -31,12 +30,38 @@ import java.util.List;
  */
 public class Task2
 {
-
     /**
      * Возвращает дубликаты пользователей, которые есть в обеих коллекциях
+     *
+     * <p>Сложность алгоритма О(n), где n сумма размеров передаваемых коллекций</p>
      */
     public static List<User> findDuplicates(Collection<User> collA, Collection<User> collB) {
-        // TODO реализовать метод
-        return null;
+        /*
+         * Выбран Set потому что у меня реализован метод hasCode/equals и поиск по такой коллекции будет быстрее,
+         * чем по той же ArrayList() в среднем О(1) (имеется в виду contains, который под капотом применяет equals)
+         */
+        Collection<User> smallest;
+        Collection<User> biggest;
+
+        //О(1)
+        if (collA.size() > collB.size()) {
+            smallest = collB; //Здесь не происходит создания новой коллекции, копируется ссылка
+            biggest = collA;
+        }else {
+            smallest = collA;
+            biggest = collB;
+        }
+        //О(n) - где n размер smallest
+        Set<User> userList = new HashSet<>(smallest);
+        List<User> result = new ArrayList<>();
+
+        for (User user : biggest) {
+            //О(1) в среднем
+            if (userList.contains(user)) {
+                result.add(user);
+            }
+        }
+
+        return result;
     }
 }
