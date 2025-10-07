@@ -53,6 +53,7 @@ public class Task2
         }
         //О(n) - где n размер smallest
         Set<User> userList = new HashSet<>(smallest);
+        //Добавление элемента в конец разницы не имеет по сложности
         List<User> result = new ArrayList<>();
 
         for (User user : biggest) {
