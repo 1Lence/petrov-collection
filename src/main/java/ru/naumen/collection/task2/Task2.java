@@ -38,7 +38,7 @@ public class Task2
     public static List<User> findDuplicates(Collection<User> collA, Collection<User> collB) {
         /*
          * Выбран Set потому что у меня реализован метод hasCode/equals и поиск по такой коллекции будет быстрее,
-         * чем по той же ArrayList() в среднем О(1) (имеется в виду contains, который под капотом применяет equals)
+         * чем по той же ArrayList(), в среднем О(1) (имеется в виду contains, который под капотом применяет equals)
          */
         Collection<User> smallest;
         Collection<User> biggest;
@@ -52,13 +52,13 @@ public class Task2
             biggest = collB;
         }
         //О(n) - где n размер smallest
-        Set<User> userList = new HashSet<>(smallest);
+        Set<User> userSet = new HashSet<>(smallest);
         //Добавление элемента в конец разницы не имеет по сложности
-        List<User> result = new ArrayList<>();
+        List<User> result = new ArrayList<>(Math.min(collA.size(), collB.size()));
 
         for (User user : biggest) {
             //О(1) в среднем
-            if (userList.contains(user)) {
+            if (userSet.contains(user)) {
                 result.add(user);
             }
         }
